@@ -1,0 +1,36 @@
+{% include 'shop_header.html'%}
+
+
+<center>
+	<form method="post">
+		<table>
+			<tr>
+				<th>Search</th>
+				<td><input type="text" name="search" class="form-control"></td>
+			</tr>
+			<tr>
+				<td style="text-align: center" colspan="2"><input type="submit" name="search" class="btn btn-info"></td>
+			</tr>
+		</table>
+	</form>
+</center>
+<table class="table">
+	<tr>
+		<th>Card Number</th>
+		<th>User Name</th>
+		<th>Date</th>
+
+		
+	</tr>
+	{%for i in data['view']%}
+	<tr>
+		<td>{{i['cardnumber']}}</td>
+		<td>{{i['fname']}}</td>
+		<td>{{i['date']}}</td>
+		<td><a href="view_product?request_id={{i['request_id']}}&type_id={{i['type_id']}}" class="btn btn-info">View Product</a></td>
+		
+	</tr>
+	{%endfor%}
+</table>
+
+{%include 'footer.html'%}

@@ -1,0 +1,110 @@
+{% include 'userheader.html' %}
+
+<center>
+    <form method="post">
+        <table>
+            <tr>
+                <th style="padding: 20px">Star Rating</th>
+                <td>
+                    <div class="star-rating">
+                        <span class="star" data-value="5">&#9733;</span>
+                        <span class="star" data-value="4">&#9733;</span>
+                        <span class="star" data-value="3">&#9733;</span>
+                        <span class="star" data-value="2">&#9733;</span>
+                        <span class="star" data-value="1">&#9733;</span>
+                    </div>
+                    <input type="hidden" name="rating" id="rating" value="0">
+                </td>
+            </tr>
+
+            <tr>
+                <td style="text-align: center;" colspan="2">
+                    <input type="submit" name="submit" class="btn btn-success">
+                </td>
+            </tr>
+        </table>
+    </form>
+</center>
+
+<table class="table">
+    <tr>
+        <th>Index</th>
+        <th>Rate</th>
+        <th>Date</th>
+    </tr>
+    {% for i in data['view'] %}
+    <tr>
+        <td>{{ loop.index }}</td>
+        <td>
+            {% for _ in range(i['rated']|default(0)|int) %} &#9733; {% endfor %}
+        </td>
+        <td>{{ i['date'] }}</td>
+        <td>
+           
+                    </td>
+    </tr>
+    {% endfor %}
+</table>
+
+{% include 'footer.html' %}
+
+<style>
+    .star-rating {
+        display: flex;
+        justify-content: start; /* Fixes reverse issue */
+    }
+    .star {
+        font-size: 30px;
+        cursor: pointer;
+        color: gray;
+        transition: color 0.3s;
+    }
+    .star:hover,
+    .star.selected {
+        color: gold;
+    }
+</style>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        let stars = document.querySelectorAll(".star");
+        let ratingInput = document.getElementById("rating");
+
+        stars.forEach((star, index) => {
+            star.addEventListener("click", function () {
+                let value = this.getAttribute("data-value");
+                ratingInput.value = value;
+
+                // Reset all stars
+                stars.forEach(s => s.classList.remove("selected"));
+
+                // Highlight selected stars (Fix order issue)
+                stars.forEach((s, i) => {
+                    if (i < value) {
+                        s.classList.add("selected");
+                    }
+                });
+            });
+
+            star.addEventListener("mouseover", function () {
+                let value = this.getAttribute("data-value");
+                stars.forEach(s => s.classList.remove("selected"));
+                stars.forEach((s, i) => {
+                    if (i < value) {
+                        s.classList.add("selected");
+                    }
+                });
+            });
+
+            star.addEventListener("mouseleave", function () {
+                let value = ratingInput.value;
+                stars.forEach(s => s.classList.remove("selected"));
+                stars.forEach((s, i) => {
+                    if (i < value) {
+                        s.classList.add("selected");
+                    }
+                });
+            });
+        });
+    });
+</script>

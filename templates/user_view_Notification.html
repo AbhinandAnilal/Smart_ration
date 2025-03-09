@@ -1,0 +1,26 @@
+{%include 'userheader.html'%}
+
+
+
+<table class="table">
+	<tr>
+		<th>Index</th>
+		<th>notificationr</th>
+		<th>Details</th>
+		<th>Date</th>
+
+	</tr>
+	{%for i in data['view']%}
+	<tr>
+		<td>{{loop.index}}</td>
+		<td>{{i['notification']}}</td>
+		<td>{{i['details']}}</td>
+		<td>{{i['date']}}</td>
+
+		
+	</tr>
+	{%endfor%}
+</table>
+
+
+{% include 'footer.html'%}

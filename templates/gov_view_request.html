@@ -1,0 +1,42 @@
+{%include 'govheader.html'%}
+<table class="table">
+	<tr>
+		<th>Name</th>
+		<th>House Name</th>
+		<th>Ward</th>
+		<th>House Number</th>
+		<th>Place</th>
+		<th>Age</th>
+		<th>Gender</th>
+		<th>Phone</th>
+		<th>Email</th>
+		<th>Designation</th>
+		<th>Status</th>
+	</tr>
+	{% for i in data['view']%}
+	<tr>
+		<td>{{i['fname']}} {{i['lname']}}</td>
+		<td>{{i['hname']}}</td>
+		<td>{{i['ward']}}</td>
+		<td>{{i['hno']}}</td>
+		<td>{{i['place']}}</td>
+		<td>{{i['age']}}</td>
+		<td>{{i['gender']}}</td>
+		<td>{{i['phone']}}</td>
+		<td>{{i['email']}}</td>
+		<td>{{i['designation']}}</td>
+		<td>{{i['status']}}</td>
+		<td><a href="gov_add_details?r_id={{i['request_id']}}" class="btn btn-info">Details</a></td>
+		{%if i['status']=='pending' %}
+			<td><a href="?action=accept&r_id={{i['request_id']}}" class="btn btn-primary">Accept</a></td>
+		<td><a href="?action=reject&r_id={{i['request_id']}}" class="btn btn-primary">Reject</a></td>
+		{% endif%}
+		{% if i['status']=='accept' %}
+			<td><a href="?action=upload&r_id={{i['request_id']}}" class="btn btn-primary">Upload</a></td>
+{% endif%}
+	
+	</tr>
+	{%endfor%}
+</table>
+
+{%include 'footer.html'%}

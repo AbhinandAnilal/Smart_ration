@@ -1,0 +1,73 @@
+{%include 'govheader.html'%}
+
+<center>
+	{% if data['up']%}
+<form method="post">
+	<table>
+		<tr>
+			<th style="padding: 20px">kilo or litter</th>
+			<td><input type="text" name="kiloorlitter" class="form-control" value="{{data['up'][0]['kiloorlitter']}}"></td>
+		</tr>
+		<tr>
+			<th style="padding: 20px">Type</th>
+			<td><select name="type">
+				{%for i in data['type']%}
+				<option value="{{i['type_id']}}">{{i['type']}}</option>
+				{%endfor%}
+			</select></td>
+		</tr>
+		<tr>
+			<th style="padding: 20px">for the month</th>
+			<td><input type="month" name="forthemonth" class="form-control" value="{{data['up'][0]['forthemonth']}}"></td>
+		</tr>
+		<tr>
+			<td style="text-align: center;" colspan="2"><input type="submit" name="update" class="btn btn-success"></td>
+		</tr>
+	</table>
+</form>
+{%else%}
+<form method="post">
+	<table>
+		<tr>
+			<th style="padding: 20px">kilo or litter</th>
+			<td><input type="text" name="kiloorlitter" class="form-control" ></td>
+		</tr>
+		<tr>
+			<th style="padding: 20px">Type</th>
+			<td><select name="type" class="form-control">
+				{%for i in data['type']%}
+				<option value="{{i['type_id']}}">{{i['type']}}</option>
+				{%endfor%}
+			</select></td>
+		</tr>
+		<tr>
+			<th style="padding: 20px">for the month</th>
+			<td><input type="month" name="forthemonth" class="form-control" ></td>
+		</tr>
+		<tr>
+			<td style="text-align: center;" colspan="2"><input type="submit" name="submit" class="btn btn-success"></td>
+		</tr>
+	</table>
+</form>
+{%endif%}
+</center>
+
+<table class="table">
+	<tr>
+		<th>kilo or litter</th>
+		<th>Type</th>
+		<th>for the month</th>
+	</tr>
+	{%for i in data['view']%}
+	<tr>
+		<td>{{i['kiloorlitter']}}</td>
+		<td>{{i['type']}}</td>
+		<td>{{i['forthemonth']}}</td>
+		<td><a href="?action=delete&r_id={{i['ptype_id']}}&pro_id={{i['ptype_id']}}" class="btn btn-danger">Delete</a></td>
+		<td><a href="?action=update&r_id={{i['ptype_id']}}&pro_id={{i['ptype_id']}}" class="btn btn-success">Update</a></td>
+	</tr>
+	{%endfor%}
+</table>
+
+
+{% include 'footer.html'%}

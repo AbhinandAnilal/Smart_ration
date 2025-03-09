@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Payment</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .payment-form {
+            max-width: 400px;
+            margin: 0 auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        .form-group label {
+            font-weight: bold;
+        }
+        .form-control1 {
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .btn-pay {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            font-size: 18px;
+            color: #fff;
+            background-color: #007bff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .btn-pay:hover {
+            background-color: #0056b3;
+        }
+        .error {
+            color: red;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <br>
+    <h1 style="text-align: center;">Payment</h1>
+    <div class="payment-form">
+        <form id="paymentForm" method="post">
+            <div class="form-group">
+                <label for="amount">Amount:</label>
+                <input type="text" class="form-control1" name="amount" id="amount" value="{{ data['amount'] }}" readonly>
+            </div>
+            <div class="form-group">
+                <input type="text" class="form-control1" name="product_idd" id="amount" value="{{ data['pid'] }}" readonly hidden>
+            </div>
+            <div class="form-group">
+                <label for="cardNumber">Card Number:</label>
+                <input type="text" class="form-control1" name="cardNumber" id="cardNumber" placeholder="Enter card number" required>
+                <span class="error" id="cardNumberError"></span>
+            </div>
+            <div class="form-group">
+                <label for="cvv">CVV:</label>
+                <input type="text" class="form-control1" name="cvv" id="cvv" placeholder="Enter CVV" required>
+                <span class="error" id="cvvError"></span>
+            </div>
+            <div class="form-group">
+                <label for="cardHolderName">Cardholder Name:</label>
+                <input type="text" class="form-control1" name="cardHolderName" id="cardHolderName" placeholder="Enter cardholder name" required>
+                <span class="error" id="cardHolderNameError"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" class="btn btn-pay" name="submit" value="Pay Now">
+            </div>
+        </form>
+    </div>
+
+    <script>
+        document.getElementById("paymentForm").addEventListener("submit", function(event) {
+            let valid = true;
+
+            // Validate Card Number
+            let cardNumber = document.getElementById("cardNumber").value.trim();
+            let cardNumberError = document.getElementById("cardNumberError");
+            if (!/^\d{13,19}$/.test(cardNumber)) {
+                cardNumberError.textContent = "Invalid card number (must be 13-19 digits)";
+                valid = false;
+            } else {
+                cardNumberError.textContent = "";
+            }
+
+            // Validate CVV
+            let cvv = document.getElementById("cvv").value.trim();
+            let cvvError = document.getElementById("cvvError");
+            if (!/^\d{3,4}$/.test(cvv)) {
+                cvvError.textContent = "Invalid CVV (must be 3 or 4 digits)";
+                valid = false;
+            } else {
+                cvvError.textContent = "";
+            }
+
+            // Validate Cardholder Name
+            let cardHolderName = document.getElementById("cardHolderName").value.trim();
+            let cardHolderNameError = document.getElementById("cardHolderNameError");
+            if (!/^[A-Za-z\s]+$/.test(cardHolderName)) {
+                cardHolderNameError.textContent = "Invalid name (only alphabets and spaces allowed)";
+                valid = false;
+            } else {
+                cardHolderNameError.textContent = "";
+            }
+
+            // Prevent form submission if validation fails
+            if (!valid) {
+                event.preventDefault();
+            }
+        });
+    </script>
+</body>
+</html>
+
+
+{% with messages = get_flashed_messages() %}
+{% if messages %}
+<ul class="flashes">
+    {% for message in messages %}
+    <script type="text/javascript">alert("{{message}}")</script>
+    {% endfor %}
+</ul>
+{% endif %}
+{% endwith %}
+

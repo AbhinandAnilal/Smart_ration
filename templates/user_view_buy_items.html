@@ -1,0 +1,26 @@
+{%include 'userheader.html'%}
+
+
+
+<table class="table">
+	<tr>
+		<th>Product Name</th>
+		<th>kilo or litter</th>
+		<th>for the month</th>
+		<th>Amount</th>
+
+	</tr>
+	{%for i in data['view']%}
+	<tr>
+		<td>{{i['product']}}</td>
+		<td>{{i['kiloorlitter']}}</td>
+		<td>{{i['forthemonth']}}</td>
+		<td>{{i['amount']}}</td>
+
+		
+	</tr>
+	{%endfor%}
+</table>
+
+
+{% include 'footer.html'%}

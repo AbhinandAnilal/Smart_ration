@@ -1,0 +1,36 @@
+{%include 'userheader.html'%}
+<table class="table">
+	<tr>
+		<th>Name</th>
+		<th>House Name</th>
+		<th>Ward</th>
+		<th>House Number</th>
+		<th>Place</th>
+		<th>Age</th>
+		<th>Phone</th>
+		<th>Email</th>
+		<th>Designation</th>
+        <th>Status</th>
+		
+	</tr>
+	{% for i in data['view']%}
+	<tr>
+		<td>{{i['fname']}} {{i['lname']}}</td>
+		<td>{{i['hname']}}</td>
+		<td>{{i['ward']}}</td>
+		<td>{{i['hno']}}</td>
+		<td>{{i['place']}}</td>
+		<td>{{i['age']}}</td>
+		
+		<td>{{i['phone']}}</td>
+		<td>{{i['email']}}</td>
+		<td>{{i['designation']}}</td>
+		<td>{{i['status']}}</td>
+        <td><a href="user_view_card_details?request_idd={{i['request_id']}}">Ration Card</a></td>
+
+		
+	</tr>
+	{%endfor%}
+</table>
+
+{% include 'footer.html'%}

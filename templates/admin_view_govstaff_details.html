@@ -1,0 +1,16 @@
+{%include 'adminheader.html'%}
+<table class="table">
+	<tr>
+		<th>Detail</th>
+		<th>Status</th>
+		
+	</tr>
+	{% for i in data['view']%}
+	<tr>
+		<td>{{i['detail']}}</td>
+		<td>{{i['status']}}</td>
+		<td><a href="admin_add_rationcard?requset_id={{i['request_id']}}" class="btn btn-success">Generate ration card</a></td>
+	</tr>
+	{%endfor%}
+</table>
+{%include 'footer.html'%}

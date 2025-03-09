@@ -1,0 +1,41 @@
+{% include 'shop_header.html'%}
+<center>
+	<table class="table">
+	<tr>
+		<th>Name</th>
+		<th>House Name</th>
+		<th>Ward</th>
+		<th>House Number</th>
+		<th>Place</th>
+		<th>Age</th>
+		<th>Gender</th>
+		<th>Phone Number</th>
+		<th>Email</th>
+		<th>Slot Date</th>
+		<th>Slot Time</th>
+		<th>Status</th>
+		
+		
+	</tr>
+	{%for i in data['view']%}
+	<tr>
+		<td>{{i['fname']}} {{i['lname']}}</td>
+		<td>{{i['hname']}}</td>
+		<td>{{i['ward']}}</td>
+		<td>{{i['hno']}}</td>
+		<td>{{i['place']}}</td>
+		<td>{{i['age']}}</td>
+		<td>{{i['gender']}}</td>
+		<td>{{i['phone']}}</td>
+		<td>{{i['email']}}</td>
+		<td>{{i['date']}}</td>
+		<td>{{i['time']}}</td>
+		<td>{{i['status']}}</td>
+		<td><a href="?action=accept&time_id={{i['time_id']}}" class="btn btn-danger">Accept</a></td>
+		<td><a href="?action=reject&time_id={{i['time_id']}}" class="btn btn-success">Reject</a></td>
+	</tr>
+	{%endfor%}
+</table>
+</center>
+
+{% include 'footer.html'%}

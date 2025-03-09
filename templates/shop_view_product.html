@@ -1,0 +1,23 @@
+{%include 'shop_header.html'%}
+
+
+
+<table class="table">
+	<tr>
+		<th>Product Name</th>
+		<th>kilo or litter</th>
+		<th>for the month</th>
+	</tr>
+	{%for i in data['view']%}
+	<tr>
+		<td>{{i['product']}}</td>
+		<td>{{i['kiloorlitter']}}</td>
+		<td>{{i['forthemonth']}}</td>
+<!-- 		<td><a href="shop_productbytype?p_type={{i['ptype_id']}}" class="btn btn-danger">View Product</a></td>
+ -->		
+	</tr>
+	{%endfor%}
+</table>
+
+
+{% include 'footer.html'%}

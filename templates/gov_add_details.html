@@ -1,0 +1,64 @@
+{%include 'govheader.html'%}
+
+<center>
+	{% if data['up']%}
+<form method="post">
+	<table>
+		<tr>
+			<th style="padding: 20px">Name</th>
+			<td><input type="text" name="name" class="form-control" value="{{data['up'][0]['name']}}"></td>
+		</tr>
+		<tr>
+			<th style="padding: 20px">Relation</th>
+			<td><input type="text" name="relation" class="form-control" value="{{data['up'][0]['relation']}}"></td>
+		</tr>
+		<tr>
+			<th style="padding: 20px">Designation</th>
+			<td><input type="text" name="designation" class="form-control" value="{{data['up'][0]['designation']}}"></td>
+		</tr>
+		<tr>
+			<td style="text-align: center;" colspan="2"><input type="submit" name="update" class="btn btn-success"></td>
+		</tr>
+	</table>
+</form>
+{%else%}
+<form method="post">
+	<table>
+		<tr>
+			<th style="padding: 20px">Name</th>
+			<td><input type="text" name="name" class="form-control" ></td>
+		</tr>
+		<tr>
+			<th style="padding: 20px">Relation</th>
+			<td><input type="text" name="relation" class="form-control" ></td>
+		</tr>
+		<tr>
+			<th style="padding: 20px">Designation</th>
+			<td><input type="text" name="designation" class="form-control" ></td>
+		</tr>
+		<tr>
+			<td style="text-align: center;" colspan="2"><input type="submit" name="submit" class="btn btn-success"></td>
+		</tr>
+	</table>
+</form>
+{%endif%}
+
+</center>
+<table class="table">
+	<tr>
+		<th>Name</th>
+		<th>Relation</th>
+		<th>Designation</th>
+	</tr>
+	{%for i in data['view']%}
+	<tr>
+		<td>{{i['name']}}</td>
+		<td>{{i['relation']}}</td>
+		<td>{{i['designation']}}</td>
+		<td><a href="?action=delete&r_id={{i['rdetail_id']}}" class="btn btn-danger">Delete</a></td>
+		<td><a href="?action=update&r_id={{i['rdetail_id']}}" class="btn btn-success">Update</a></td>
+	</tr>
+	{%endfor%}
+</table>
+
+{%include 'footer.html'%}

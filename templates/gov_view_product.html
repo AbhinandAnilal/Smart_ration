@@ -1,0 +1,19 @@
+{% include 'govheader.html'%}
+<table class="table">
+	<tr>
+		<th>Product</th>
+		<th>Details</th>
+		<th>Amount</th>
+	</tr>
+	{%for i in data['view']%}
+	<tr>
+		<td>{{i['product']}}</td>
+		<td>{{i['details']}}</td>
+		<td>{{i['amount']}}</td>
+		<td><a href="gov_add_producttype?pro_id={{i['product_id']}}" class="btn btn-info">Type</a></td>
+		
+	</tr>
+	{%endfor%}
+</table>
+
+{%include 'footer.html'%}

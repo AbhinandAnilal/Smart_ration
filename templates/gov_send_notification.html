@@ -1,0 +1,52 @@
+{%include 'govheader.html'%}
+
+<center>
+	{% if data['up']%}
+<form method="post">
+	<table>
+		<tr>
+			<th style="padding: 20px">Notification</th>
+			<td><input type="text" name="notification" class="form-control" value="{{data['up'][0]['notification']}}"></td>
+		</tr>
+		<tr>
+			<th style="padding: 20px">Details</th>
+			<td><input type="text" name="Details" class="form-control" value="{{data['up'][0]['details']}}"></td>
+		</tr>
+		<tr>
+			<td style="text-align: center;"><input type="submit" name="update" class="btn btn-danger"></td>
+		</tr>
+	</table>
+</form>
+{%else%}
+<form method="post">
+	<table>
+		<tr>
+			<th style="padding: 20px">Notification</th>
+			<td><input type="text" name="notification" class="form-control"></td>
+		</tr>
+		<tr>
+			<th style="padding: 20px">Details</th>
+			<td><input type="text" name="Details" class="form-control"></td>
+		</tr>
+		<tr>
+			<td style="text-align: center;" colspan="2"><input type="submit" name="submit" class="btn btn-success"></td>
+		</tr>
+	</table>
+</form>
+{%endif%}
+
+</center>
+<table class="table">
+	<tr>
+		<th>Notification</th>
+		<th>Details</th>
+	</tr>
+	{%for i in data['view']%}
+	<tr>
+		<td>{{i['notification']}}</td>
+		<td>{{i['details']}}</td>
+		<td><a href="?action=delete&r_id={{i['notification_id']}}" class="btn btn-danger">Delete</a></td>
+		<td><a href="?action=update&r_id={{i['notification_id']}}" class="btn btn-success">Update</a></td>
+	</tr>
+	{%endfor%}
+</table>

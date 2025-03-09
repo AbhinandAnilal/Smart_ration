@@ -1,0 +1,39 @@
+{%include 'userheader.html'%}
+
+<center>
+
+<form method="post">
+	<table>
+		<tr>
+			<th style="padding: 20px">Feedback</th>
+			<td><input type="type" name="feedback" class="form-control" ></td>
+		</tr>
+		
+		<tr>
+			<td style="text-align: center;" colspan="2"><input type="submit" name="submit" class="btn btn-success"></td>
+		</tr>
+	</table>
+</form>
+
+</center>
+
+<table class="table">
+	<tr>
+		<th>Indec</th>
+		<th>Feedback</th>
+		<th>Date</th>
+
+	</tr>
+	{%for i in data['view']%}
+	<tr>
+		<td>{{loop.index}}</td>
+		<td>{{i['feedback']}}</td>
+		<td>{{i['date']}}</td>
+		
+
+	
+	</tr>
+	{%endfor%}
+</table>
+
+{%include 'footer.html'%}
